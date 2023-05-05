@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+ <head>
+    <title>Failure of Success Criterion 3.3.8 and 3.3.9 due to preventing pasting of passwords</title>
+
+    <link rel="stylesheet" type="text/css" href="../../css/editors.css"/>
+</head>
+
+ <body>
+
+    <h1>Failure of Success Criterion 3.3.8 and 3.3.9 due to preventing pasting of passwords</h1>
+
+    <section class="meta">
+        <p class="id">ID: F110</p><p class="technology">Technology: failures</p><p class="type">Type: Failure</p>
+    </section>
+
+    <section id="applicability"><h2>When to Use</h2>
+      <p>All technologies that require authentication.</p>
+    </section>
+
+   <section id="description">
+    <h2>Description</h2>
+
+    <p>Preventing a user from pasting passwords is a failure to meet Success Criteria 3.3.8 and 3.3.9 (unless alternative authentication methods are available). A password in this context could be a password, passcode, passphrase or any string of characters the user has to remember or record to authenticate.</p>
+
+    <p>This approach prevents use of common mechanisms to assist a user, such as using a password manager to store and autocomplete the password, or using the device clipboard to copy and paste a password. This forces a user to transcribe the password manually, resulting in a <a href="../../understanding/22/accessible-authentication.html#dfn-cognitive-function-test">cognitive function test</a>.</p>
+
+   </section>
+
+   <section id="examples">
+    <h2>Examples</h2>
+    <p>These examples would prevent a user from pasting a password into a password field:</p>
+
+
+      <section class="example">
+              <h3>Using <code class="language-html">onpaste</code> to prevent pasting in a password field</h3>
+              <p>A secure website has an email and password based login form, which prevents pasting using the <code class="language-html">onpaste</code>event. This prevents users from manually pasting passwords or using a password manager that is based outside their browser.</p>
+              <pre>
+      <code class="language-html">
+      &lt;form method=&quot;post&quot; action=&quot;login&quot;&gt;
+       &lt;div&gt;
+         &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;
+         &lt;input id=&quot;email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; ... &gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;label for=&quot;password&quot;&gt;Password&lt;/label&gt;
+          &lt;input id=&quot;password&quot; type=&quot;password&quot; onpaste=&quot;return false&quot; ... &gt;
+        &lt;/div&gt;
+          &lt;input type=&quot;submit&quot; value=&quot;Login&quot; &gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+      </code>
+               </pre>
+            </section>
+
+
+      <section class="example">
+              <h3>Using <code class="language-html">autocomplete</code> to prevent autocomplete in a password field</h3>
+              <p>A secure website has an email and password based login form, which prevents autocomplete using the <code class="language-html">autocomplete</code>attribute. Although most browsers ignore <code class="language-html">autocomplete=&quot;off&quot;</code> for password inputs, users of older browsers may still be affected.</p>
+              <pre>
+      <code class="language-html">
+      &lt;form method=&quot;post&quot; action=&quot;login&quot;&gt;
+       &lt;div&gt;
+         &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;
+         &lt;input id=&quot;email&quot; type=&quot;email&quot; autocomplete=&quot;off&quot; ... &gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;label for=&quot;password&quot;&gt;Password&lt;/label&gt;
+          &lt;input id=&quot;password&quot; type=&quot;password&quot; autocomplete=&quot;off&quot; ... &gt;
+        &lt;/div&gt;
+          &lt;input type=&quot;submit&quot; value=&quot;Login&quot; &gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+      </code>
+               </pre>
+            </section>
+
+
+   </section>
+
+   <section id="tests"><h2>Tests</h2>
+      <section class="procedure"><h3>Procedure</h3>
+        <p>For each form field which accepts password entry:</p>
+         <ol>
+            <li>Check if the structure of the input field(s) prevents the user from pasting or autocompleting their password.</li>
+            <li>Confirm that no other acceptable authentication methods are present that satisfy Success Criteria 3.3.8 or 3.3.9 (such as an authentication method that does not rely on a cognitive function test).</li>
+         </ol>
+      </section>
+      <section class="results"><h3>Expected Results</h3>
+         <ul>
+            <li>If steps #1 and #2 are true, then this failure condition applies and content fails the Success Criterion.</li>
+         </ul>
+      </section>
+   </section>
+   <section id="related">
+    <h2>Related Techniques</h2>
+    </section>
+    <section id="resources">
+        <h2>Resources</h2>
+            <ul>
+                <li><a href="https://www.boia.org/blog/is-your-sites-authentication-process-accessible">Bureau of Internet Accessibility: How To Make Your Website's Authentication Process Accessible</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password">Mozilla MDN: Documentation for password inputs</a></li>
+            </ul>
+
+    </section>
+</body>
+</html>
